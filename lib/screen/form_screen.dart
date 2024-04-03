@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tugas4/controller/kontak_controller.dart';
+import 'package:tugas4/model/kontak_model.dart';
+import 'package:tugas4/screen/home_view.dart';
 
 class FormScreen extends StatefulWidget {
   const FormScreen({super.key});
@@ -95,10 +97,34 @@ class _FormScreenState extends State<FormScreen> {
             ),
           ),
           Container(
-            margin: EdgeInsets.all(10),
+            margin: const EdgeInsets.all(10),
             child: ElevatedButton(
-              onPressed: () {},
-              child: Text("Simpan"),
+              onPressed: () async {
+                if (_formkey.currentState!.validate()) {
+                  _formkey.currentState!.save();
+                  //Proses simpan data
+                 Kontak _person = Kontak(nama: _namaController.text, 
+                 email: _emailController.text, 
+                 alamat: _alamatController.text, 
+                 telepon: _noTeleponController.text, 
+                 foto: _image!.path);
+
+                 var result =
+                  await _personController.addPerson(_person, _image);
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(result['message']),
+                    ),
+                  );
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomeView()),
+                    (route) => false,
+                  );
+                }
+              },
+              child: const Text('Simpan'),
             ),
           ),
         ],
