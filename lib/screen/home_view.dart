@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tugas4/controller/kontak_controller.dart';
 import 'package:tugas4/model/kontak_model.dart';
+import 'package:tugas4/screen/form_screen.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -52,6 +53,13 @@ class _HomeViewState extends State<HomeView> {
             );
           }
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const FormScreen()));
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
