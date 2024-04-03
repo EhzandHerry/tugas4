@@ -24,11 +24,6 @@ class _FormScreenState extends State<FormScreen> {
     final XFile? pickerFile =
         await _imagePicker.pickImage(source: ImageSource.gallery);
 
-    Future<void> getImage() async {
-      final XFile? pickerFile =
-          await _imagePicker.pickImage(source: ImageSource.gallery);
-    }
-
     setState(
       () {
         if (pickerFile != null) {
