@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tugas4/controller/kontak_controller.dart';
+import 'package:tugas4/model/kontak_model.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -9,10 +10,9 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-
   final KontakController _controller = KontakController();
 
-   @override
+  @override
   void initState() {
     super.initState();
     _controller.getPeople();
@@ -20,6 +20,10 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Daftar Orang"),
+      ),
+    );
   }
 }
