@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tugas4/controller/kontak_controller.dart';
 
 class FormScreen extends StatefulWidget {
   const FormScreen({super.key});
@@ -19,6 +20,8 @@ class _FormScreenState extends State<FormScreen> {
   final _emailController = TextEditingController();
   final _alamatController = TextEditingController();
   final _noTeleponController = TextEditingController();
+
+  final KontakController _personController = KontakController();
 
   Future<void> getImage() async {
     final XFile? pickerFile =
