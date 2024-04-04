@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tugas4/screen/form_screen.dart';
 import 'package:tugas4/screen/home_view.dart';
 
 void main() {
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Center(child: Text("Kontak Form")),
+          title: const Center(child: Text("Home View")),
         ),
         body: const HomeView(),
       ),

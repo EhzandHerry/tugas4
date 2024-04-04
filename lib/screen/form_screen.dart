@@ -42,92 +42,99 @@ class _FormScreenState extends State<FormScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formkey,
-      child: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              decoration:
-                  InputDecoration(labelText: "Nama", hintText: "Masukkan Nama"),
-              controller: _namaController,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Form Kontak"),
+        centerTitle: true,
+        backgroundColor: Color.fromARGB(255, 200, 210, 214),
+      ),
+      body: Form(
+        key: _formkey,
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.all(10),
+              child: TextFormField(
+                decoration:
+                    const InputDecoration(labelText: "Nama", hintText: "Masukkan Nama"),
+                controller: _namaController,
+              ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              decoration: InputDecoration(
-                  labelText: "Email", hintText: "Masukkan Email"),
-              controller: _emailController,
+            Container(
+              margin: const EdgeInsets.all(10),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                    labelText: "Email", hintText: "Masukkan Email"),
+                controller: _emailController,
+              ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              decoration: InputDecoration(
-                  labelText: "Alamat", hintText: "Masukkan Alamat"),
-              controller: _alamatController,
+            Container(
+              margin: const EdgeInsets.all(10),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                    labelText: "Alamat", hintText: "Masukkan Alamat"),
+                controller: _alamatController,
+              ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              decoration: InputDecoration(
-                  labelText: "No Telepon", hintText: "Masukkan No Telepon"),
-              controller: _noTeleponController,
+            Container(
+              margin: const EdgeInsets.all(10),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                    labelText: "No Telepon", hintText: "Masukkan No Telepon"),
+                controller: _noTeleponController,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 50),
-            child: SizedBox(
-              child: Text("No Image Selected"),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 50),
+              child: SizedBox(
+                child: Text("No Image Selected"),
+              ),
             ),
-          ),
-           _image == null
-               ? const Text("Tidak ada data yang dipilih")
-               : Image.file(_image!),
-          Container(
-            margin: EdgeInsets.all(10),
-            child: ElevatedButton(
-              onPressed: () {
-                getImage();
-              },
-              child: Text("Pilih Gambar"),
+             _image == null
+                 ? const Text("Tidak ada data yang dipilih")
+                 : Image.file(_image!),
+            Container(
+              margin: const EdgeInsets.all(10),
+              child: ElevatedButton(
+                onPressed: () {
+                  getImage();
+                },
+                child: const Text("Pilih Gambar"),
+              ),
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.all(10),
-            child: ElevatedButton(
-              onPressed: () async {
-                if (_formkey.currentState!.validate()) {
-                  _formkey.currentState!.save();
-                  //Proses simpan data
-                 Kontak _person = Kontak(nama: _namaController.text, 
-                 email: _emailController.text, 
-                 alamat: _alamatController.text, 
-                 telepon: _noTeleponController.text, 
-                 foto: _image!.path);
-
-                 var result =
-                  await _personController.addPerson(_person, _image);
-
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(result['message']),
-                    ),
-                  );
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomeView()),
-                    (route) => false,
-                  );
-                }
-              },
-              child: const Text('Simpan'),
+            Container(
+              margin: const EdgeInsets.all(10),
+              child: ElevatedButton(
+                onPressed: () async {
+                  if (_formkey.currentState!.validate()) {
+                    _formkey.currentState!.save();
+                    //Proses simpan data
+                   Kontak person = Kontak(nama: _namaController.text, 
+                   email: _emailController.text, 
+                   alamat: _alamatController.text, 
+                   telepon: _noTeleponController.text, 
+                   foto: _image!.path);
+      
+                   var result =
+                    await _personController.addPerson(person, _image);
+      
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(result['message']),
+                      ),
+                    );
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HomeView()),
+                      (route) => false,
+                    );
+                  }
+                },
+                child: const Text('Simpan'),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
